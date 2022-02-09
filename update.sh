@@ -30,5 +30,5 @@ cp -r ~/.config/scripts/* scripts/
 mkdir-clean bin
 cp "$(which status-bar)" bin
 
-mkdir-clean home
-cp ~/.zshrc home/.zshrc
+# mkdir-clean home
+# cp ~/.zshrc home/.zshrc
