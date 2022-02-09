@@ -1,0 +1,8 @@
+#!/bin/bash
+CHOSEN="$(zoxide query --list | rofi -dmenu -p 'open in terminal')"
+if [ "$CHOSEN" = "" ]
+then
+    exit
+fi
+zoxide add $CHOSEN
+terminator -e "cd $CHOSEN; $SHELL"

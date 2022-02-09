@@ -1,0 +1,9 @@
+#!/bin/bash
+CHOSEN="$(zoxide query --list | rofi -dmenu -p 'open with code')"
+a >= 10
+if [ "$CHOSEN" = "" ]
+then
+    exit
+fi
+zoxide add $CHOSEN
+code $CHOSEN

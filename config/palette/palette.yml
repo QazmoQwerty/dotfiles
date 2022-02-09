@@ -1,0 +1,233 @@
+rofi:
+  opposite_align_commands_and_shortcuts: true
+  window_width: 91
+
+commands:
+  -
+    description: "Toggle lemonbar visibility"
+    exec: "~/.config/scripts/toggle-lemonbar-visibility"
+    meta: "hide"
+  -
+    description: "launch: Terminal"
+    keybinding: "super+t"
+    exec: "alacritty"
+    meta: "alacritty"
+  -
+    description: "launch: Firefox"
+    keybinding: "super+b"
+    exec: "firefox"
+    meta: "web browser"
+  -
+    description: "launch: File explorer"
+    keybinding: "super+e"
+    exec: "nemo"
+  -
+    description: "launch: Run prompt"
+    keybinding: "super+r"
+    exec: "rofi -show run"
+  -
+    description: "launch: Visual Studio Code"
+    exec: "code -n"
+  -
+    description: "Open path in Visual Studio Code"
+    exec: "~/.config/scripts/open-in-vscode"
+  -
+    description: "Open path in terminal"
+    exec: "~/.config/scripts/open-in-terminal"
+  -
+    description: "bspwm: Restart bspwm"
+    keybinding: "super+ctrl+r"
+    exec: "bspc wm -r"
+  -
+    description: "bspwm: Toggle floating mode for current window"
+    exec: "bspc node -t \\~floating"
+  -
+    description: "bspwm: Toggle fullscreen mode for current window"
+    exec: "bspc node -t \\~fullscreen"
+  -
+    description: "Show clipmenu"
+    keybinding: "super+c"
+    exec: "CM_LAUNCHER=rofi clipmenu"
+  -
+    description: "bspwm: Quit bspwm"
+    keybinding: "super+ctrl+shift+q"
+    exec: "bspc quit"
+  -
+    description: "bspwm: Focus window in direction (up)"
+    keybinding: "super+Up"
+    exec: "bspc node -f north"
+  -
+    description: "bspwm: Focus window in direction (down)"
+    keybinding: "super+Down"
+    exec: "bspc node -f south"
+  -
+    description: "bspwm: Focus window in direction (left)"
+    keybinding: "super+Left"
+    exec: "bspc node -f west"
+  -
+    description: "bspwm: Focus window in direction (right)"
+    keybinding: "super+Right"
+    exec: "bspc node -f east"
+  -
+    description: "bspwm: Move window in direction (up)"
+    keybinding: "super+shift+Up"
+    exec: "bspc node -s north"
+  -
+    description: "bspwm: Move window in direction (down)"
+    keybinding: "super+shift+Down"
+    exec: "bspc node -s south"
+  -
+    description: "bspwm: Move window in direction (left)"
+    keybinding: "super+shift+Left"
+    exec: "bspc node -s west"
+  -
+    description: "bspwm: Move window in direction (right)"
+    keybinding: "super+shift+Right"
+    exec: "bspc node -s east"
+  -
+    description: "bspwm: Grow window in direction (up)"
+    keybinding: "super+ctrl+Up"
+    exec: "bspc node -z top 0 -20"
+    meta: resize
+  -
+    description: "bspwm: Grow window in direction (down)"
+    keybinding: "super+ctrl+Down"
+    exec: "bspc node -z bottom 0 20"
+    meta: resize
+  -
+    description: "bspwm: Grow window in direction (left)"
+    keybinding: "super+ctrl+Left"
+    exec: "bspc node -z left -20 0"
+    meta: resize
+  -
+    description: "bspwm: Grow window in direction (right)"
+    keybinding: "super+ctrl+Right"
+    exec: "bspc node -z right 20 0"
+    meta: resize
+  -
+    description: "bspwm: Shrink window in direction (up)"
+    keybinding: "super+ctrl+shift+Up"
+    exec: "bspc node -z top 0 20"
+    meta: resize
+  -
+    description: "bspwm: Shrink window in direction (down)"
+    keybinding: "super+ctrl+shift+Down"
+    exec: "bspc node -z bottom 0 -20"
+    meta: resize
+-
+    description: "bspwm: Shrink window in direction (left)"
+    keybinding: "super+ctrl+shift+Left"
+    exec: "bspc node -z left 20 0"
+    meta: resize
+  -
+    description: "bspwm: Shrink window in direction (right)"
+    keybinding: "super+ctrl+shift+Right"
+    exec: "bspc node -z right -20 0"
+    meta: resize
+  -
+    description: "bspwm: Rotate tree nodes"
+    keybinding: "super+shift+bracketleft"
+    exec: "bspc node @/ -C backward"
+  -
+    description: "bspwm: Rotate tree nodes"
+    keybinding: "super+shift+bracketright"
+    exec: "bspc node @/ -C forward"
+  -
+    description: "bspwm: Close focused window"
+    keybinding: "super+q"
+    exec: "xdo close"
+  -
+    description: "bspwm: Alternate between the tiled and monocle layout"
+    keybinding: "super+m"
+    exec: "bspc desktop -l next"
+  -
+    description: "bspwm: Focus next node"
+    keybinding: "super+Tab"
+    exec: "bspc node -f next.local"
+  -
+    description: "bspwm: Focus last node"
+    keybinding: "super+shift+Tab"
+    exec: "bspc node -f last.local"
+  -
+    description: "palette: Show command palette"
+    keybinding: "super+p"
+    exec: "palette show"
+  -
+    description: "palette: Reload configuration"
+    exec: "palette reload"
+  -
+    description: "palette: Open configuration"
+    exec: "code ~/.config/palette/palette.yml"
+  -
+    description: "Open picom.conf"
+    exec: "code ~/.config/picom/picom.conf"
+  -
+    description: "Open sxhkdrc"
+    exec: "code ~/.config/sxhkd/sxhkdrc"
+  -
+    description: "Open bspwmrc"
+    exec: "code ~/.config/bspwm/bspwmrc"
+  -
+    description: "bsp-layout: Cycle layout"
+    keybinding: "super+space"
+    exec: "bsp-layout cycle  "
+  -
+    description: "bsp-layout: Select layout by name"
+    keybinding: "super+alt+space"
+    exec: "bsp-layout set `bsp-layout layouts | rofi -dmenu -p 'select layout'`"
+  -
+    description: "dskmgr: Switch to desktop in direction up"
+    keybinding: "super+alt+Up"
+    exec: "dskmgr move up"
+  -
+    description: "dskmgr: Switch to desktop in direction down"
+    keybinding: "super+alt+Down"
+    exec: "dskmgr move down"
+  -
+    description: "dskmgr: Switch to desktop in direction left"
+    keybinding: "super+alt+Left"
+    exec: "dskmgr move left"
+  -
+    description: "dskmgr: Switch to desktop in direction right"
+    keybinding: "super+alt+Right"
+    exec: "dskmgr move right"
+  -
+    description: "Move to desktop in direction up"
+    keybinding: "super+alt+shift+Up"
+    exec: "~/.config/scripts/move-window-to-desktop-in-direction up"
+  -
+    description: "Move to desktop in direction down"
+    keybinding: "super+alt+shift+Down"
+    exec: "~/.config/scripts/move-window-to-desktop-in-direction down"
+  -
+    description: "Move to desktop in direction left"
+    keybinding: "super+alt+shift+Left"
+    exec: "~/.config/scripts/move-window-to-desktop-in-direction left"
+  -
+    description: "Move to desktop in direction right"
+    keybinding: "super+alt+shift+Right"
+    exec: "~/.config/scripts/move-window-to-desktop-in-direction right"
+  -
+    description: "dskmgr: Create new desktop in current group"
+    keybinding: "super+shift+n"
+    exec: "dskmgr new-y"
+  -
+    description: "dskmgr: Create new desktop group"
+    keybinding: "super+n"
+    exec: "dskmgr new-x"
+  -
+    description: "dskmgr: Remove current desktop"
+    keybinding: "super+ctrl+q"
+    exec: "dskmgr remove"
+  -
+    description: "Volume up"
+    keybinding: "XF86AudioRaiseVolume"
+    exec: "amixer set Master 3%+; amixer set Master unmute"
+  -
+    description: "Volume down"
+    keybinding: "XF86AudioLowerVolume"
+    exec: "amixer set Master 3%-; amixer set Master unmute"
+  -
+    description: "Volume mute"
+    keybinding: "XF86AudioMute"
+    exec: "amixer set Master toggle"

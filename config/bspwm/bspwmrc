@@ -1,0 +1,82 @@
+#!/bin/bash
+
+# file: `/home/magshimim/.config/bspwm/bspwmrc`
+
+# setup monitors
+xrandr --output eDP-1 --auto --pos 0x0
+# xrandr --output HDMI-1 --auto --pos 1920x0
+
+# hotkeys daemon
+# killall -q sxhkd
+# sxhkd &
+
+# palette daemon (start sxhkd)
+killall -q paletted
+paletted &
+# paletted --commands ~/.config/palette/commands.json --backend sxhkd &
+
+# notifications daemon
+killall -q dunst
+dunst &
+
+# policy kit (allows applications to ask for password)
+killall -q polkit-gnome-authentication-agent-1
+/usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1 &
+
+# compositor
+picom --experimental-backends &
+
+# bind caps lock to backspace + add hebrew
+setxkbmap -option caps:backspace
+setxkbmap -option grp:alt_caps_toggle us,il
+xmodmap -e "clear Lock"
+
+# start clipboard manager
+killall -q clipmenud
+clipmenud &
+
+# init desktops manager
+bspc monitor eDP-1 -d 0-0_eDP-1
+# bspc monitor HDMI-1 -d 0-0_HDMI-1
+
+killall -q dskmgrd
+dskmgrd &
+sleep 0.1 # TODO - remove this
+
+# init status bar
+killall -q status-bar
+status-bar &
+while [ "$(xdo id -n lemonbar)" = "" ]
+do
+    sleep 0.001
+done
+xdo above -t $(xdo id -n root) $(xdo id -n lemonbar) # stop bar from always being on top
+
+# set key repeat rate
+xset r rate 400 35
+
+# set wallpaper
+feh --bg-fill ~/.config/feh
+
+bspc rule -a Peek state=floating
+
+# general wm setup
+bspc config borderless_monocle true
+bspc config gapless_monocle true
+
+bspc config -m eDP-1 top_padding 25
+# bspc config -m HDMI-1 top_padding 0
+bspc config left_padding 0
+bspc config right_padding 0
+bspc config bottom_padding 0
+
+bspc config border_width 2
+bspc config window_gap 10
+
+bspc config super mod4
+bspc config pointer_action1 move
+bspc config pointer_action2 none
+bspc config pointer_action3 resize_corner
+
+bspc config click_to_focus true
+# bspc config focus_follows_pointer true

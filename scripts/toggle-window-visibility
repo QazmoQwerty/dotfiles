@@ -1,0 +1,8 @@
+#!/bin/bash
+WINDOW_ID=$(xdo id -n $1)
+if xwininfo -id $WINDOW_ID | grep -q IsViewable
+then
+    xdo hide $WINDOW_ID
+else
+    xdo show $WINDOW_ID
+fi

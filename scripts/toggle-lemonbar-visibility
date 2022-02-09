@@ -1,0 +1,11 @@
+#!/bin/bash
+WINDOW_ID=$(xdo id -n lemonbar)
+if xwininfo -id $WINDOW_ID | grep -q IsViewable
+then
+    xdo hide $WINDOW_ID
+    bspc config -m eDP-1 top_padding 0
+else
+    xdo show $WINDOW_ID
+    bspc config -m eDP-1 top_padding 25
+fi
+

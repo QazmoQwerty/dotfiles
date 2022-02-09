@@ -1,0 +1,10 @@
+#!/bin/bash
+QUERY_NAME=$1
+COMMAND=$2
+CHOSEN="$(zoxide query --list | rofi -dmenu -p "$QUERY_NAME")"
+if [ "$CHOSEN" = "" ]
+then
+    exit
+fi
+zoxide add $CHOSEN
+$COMMAND $CHOSEN
