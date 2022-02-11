@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+function wait-for-daemon-to-start() {
+    while [ "$(xdo id -n $1)" = "" ]; do
+        sleep 0.01
+    done
+}
+
+function set-below-root() {
+    wait-for-daemon-to-start "$1"
+    xdo above -t $(xdo id -n root) $(xdo id -n "$1")
+}
+
+export _POLYBAR_BACKGROUND_COLOR=$(settings get polybar.color.background)
+export _POLYBAR_FOREGROUND_COLOR=$(settings get polybar.color.foreground)
+export _POLYBAR_PRIMARY_COLOR=$(settings get polybar.color.primary)
+export _POLYBAR_SECONDARY_COLOR=$(settings get polybar.color.secondary)
+export _POLYBAR_DISABLED_COLOR=$(settings get polybar.color.disabled)
+
+export _POLYBAR_HEIGHT=$(settings get polybar.height.base)
+_POLYBAR_TEXT_OFFSET=$(settings get polybar.height.extra)
+
+export _POLYBAR_FONT="Cascadia Mono;$((${_POLYBAR_TEXT_OFFSET} + 2))"
+
+function fixup() {
+    sleep 2
+    set-below-root polybar
+    bspc config -m "$(settings get main_monitor)" top_padding $((${_POLYBAR_TEXT_OFFSET} * 2 + ${_POLYBAR_HEIGHT} - $(bspc config window_gap)))
+    bspc config -m "$(settings get main_monitor)" top_monocle_padding $(bspc config window_gap)
+}
+fixup &
+polybar

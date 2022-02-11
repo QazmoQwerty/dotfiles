@@ -4,9 +4,9 @@ rofi:
 
 commands:
   -
-    description: "Toggle lemonbar visibility"
-    exec: "~/.config/scripts/toggle-lemonbar-visibility"
-    meta: "hide"
+    description: "Toggle status bar visibility"
+    exec: "~/.config/scripts/toggle-bar-visibility polybar"
+    meta: "hide polybar"
   -
     description: "launch: Terminal"
     keybinding: "super+t"
@@ -33,6 +33,7 @@ commands:
     exec: "~/.config/scripts/open-in-vscode"
   -
     description: "Open path in terminal"
+    keybinding: super+shift+t
     exec: "~/.config/scripts/open-in-terminal"
   -
     description: "bspwm: Restart bspwm"
@@ -114,7 +115,7 @@ commands:
     keybinding: "super+ctrl+shift+Down"
     exec: "bspc node -z bottom 0 -20"
     meta: resize
--
+  -
     description: "bspwm: Shrink window in direction (left)"
     keybinding: "super+ctrl+shift+Left"
     exec: "bspc node -z left 20 0"
@@ -153,28 +154,33 @@ commands:
     keybinding: "super+p"
     exec: "palette show"
   -
+    description: "palette: Validate current config"
+    exec: notify-send "$(paletted --validate)"
+  -
     description: "palette: Reload configuration"
     exec: "palette reload"
   -
-    description: "palette: Open configuration"
+    description: "palette: Edit configuration"
     exec: "code ~/.config/palette/palette.yml"
   -
-    description: "Open picom.conf"
+    description: "Edit picom.conf"
     exec: "code ~/.config/picom/picom.conf"
   -
-    description: "Open sxhkdrc"
+    description: "Edit sxhkdrc"
     exec: "code ~/.config/sxhkd/sxhkdrc"
+    meta: configuration
   -
-    description: "Open bspwmrc"
+    description: "Edit bspwmrc"
     exec: "code ~/.config/bspwm/bspwmrc"
+    meta: configuration
   -
     description: "bsp-layout: Cycle layout"
     keybinding: "super+space"
-    exec: "bsp-layout cycle  "
+    exec: "bsp-layout cycle"
   -
     description: "bsp-layout: Select layout by name"
     keybinding: "super+alt+space"
-    exec: "bsp-layout set `bsp-layout layouts | rofi -dmenu -p 'select layout'`"
+    exec: "bsp-layout once `bsp-layout layouts | rofi -dmenu -p 'select layout'`"
   -
     description: "dskmgr: Switch to desktop in direction up"
     keybinding: "super+alt+Up"

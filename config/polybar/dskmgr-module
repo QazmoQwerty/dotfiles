@@ -1,0 +1,85 @@
+#!/usr/bin/env python3
+import os
+import json
+from subprocess import Popen, PIPE
+from typing import Any, Dict, Optional
+
+UNICODE_ELLIPSIS = '\u2026'
+
+def itoa_with_values(value: int, values: str, base=10) -> str:
+    assert len(values) == base
+    result = ''
+    while True:
+        result = values[value % base] + result
+        value //= base
+        if value == 0:
+            return result
+
+def superscript(value: int) -> str:
+    return itoa_with_values(value, '⁰¹²³⁴⁵⁶⁷⁸⁹')
+
+def subscript(value: int) -> str:
+    return itoa_with_values(value, '₀₁₂₃₄₅₆₇₈₉')
+
+class DskmgrSubscriptionProcess:
+    def __init__(self) -> None:
+        self._process = Popen(['dskmgr', 'subscribe'], stdout=PIPE)
+    
+    def read(self) -> Dict[str, Any]:
+        return json.loads(self._process.stdout.readline().decode())
+
+UNDERLINE_COLOR = os.getenv('_POLYBAR_FOREGROUND_COLOR') or '#00000000'
+
+def selected_color(string: str) -> str:
+    return f'%{{+u}}%{{U{UNDERLINE_COLOR}}}{string}%{{-u}}%{{U-}}'
+
+def left_click_action(string: str, action: str) -> str:
+    return f'%{{A1:{action}:}}{string}%{{A}}'
+
+def right_click_action(string: str, action: str) -> str:
+    return f'%{{A3:{action}:}}{string}%{{A}}'
+
+class Workspaces:
+    def __init__(self):
+        self._subscription_process = DskmgrSubscriptionProcess()
+        self._viewport = range(0, 6)
+    
+    def _single_output(self, index: int, size: int, y: int, selected: Optional[bool]) -> str:
+        if selected:
+            output = f'    {index+1}    ' if size == 1 else  f' {index+1} ({y+1}/{size}) '
+            return selected_color(right_click_action(left_click_action(output, 'dskmgr move up'), 'dskmgr move down'))
+        return left_click_action(f'  {index+1}{subscript(size) if size > 1 else " "} ', f'dskmgr goto {index}')
+
+    def output(self) -> str:
+        state = self._subscription_process.read()
+        outputs = []
+        selected = state.get('focused')
+        for i, d in enumerate(state.get('groups')):
+            outputs += [self._single_output(i, d['size'], d['y'], i == selected)]
+        
+        if selected < self._viewport.start:
+            self._viewport = range(selected, selected + len(self._viewport))
+        elif selected >= self._viewport.stop:
+            last = min(selected, len(outputs) - 2)
+            self._viewport = range(last + 1 - len(self._viewport), last + 1)
+
+        prefix  = f'{UNICODE_ELLIPSIS} ' if self._viewport.start != 0 else '  '
+        if self._viewport.stop < len(outputs):
+            postfix = outputs[-1] if self._viewport.stop == len(outputs) - 1 else f' {UNICODE_ELLIPSIS}{outputs[-1]}'
+        else:
+            postfix = ''
+
+        return ' ' + prefix + ''.join(outputs[self._viewport.start:self._viewport.stop]) + postfix + ' '
+
+
+def print_flush(*args, **kwarg) -> None:
+    print(*args, **kwarg, flush=True)
+
+def main():
+    # subscription_process = DskmgrSubscriptionProcess()
+    p = Workspaces()
+    while True:
+        print_flush(p.output())
+
+if __name__ == '__main__':
+    main()

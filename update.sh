@@ -21,14 +21,21 @@ cp ~/.config/micro/bindings.json config/micro
 cp ~/.config/micro/settings.json config/micro
 cp -r ~/.config/micro/colorschemes config/micro
 
+mkdir-clean config/polybar
+cp ~/.config/polybar/* config/polybar
+
 mkdir-clean config/feh
 cp ~/.config/feh/* config/feh
+
+mkdir-clean config/rofi
+cp ~/.config/rofi/config.rasi config/rofi
+cp ~/.config/rofi/nord.rasi config/rofi
 
 mkdir-clean scripts/
 cp -r ~/.config/scripts/* scripts/
 
 mkdir-clean bin
-cp "$(which status-bar)" bin
+cp "$(which settings)" bin
 
 # mkdir-clean home
 # cp ~/.zshrc home/.zshrc
