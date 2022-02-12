@@ -176,10 +176,10 @@ commands:
     description: "Edit bspwmrc"
     exec: "code ~/.config/bspwm/bspwmrc"
     meta: configuration
-  -
-    description: "bsp-layout: Cycle layout"
-    keybinding: "super+space"
-    exec: "bsp-layout cycle"
+  # -
+  #   description: "bsp-layout: Cycle layout"
+  #   keybinding: "super+space"
+  #   exec: "bsp-layout cycle"
   -
     description: "bsp-layout: Select layout by name"
     keybinding: "super+alt+space"

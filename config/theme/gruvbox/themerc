@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+# "nord-lightish" theme
+
+TRANSPARENT_COLOR='#00000000'
+
+FOREGROUND='#dfbf8e'
+SECONDARY="#928374"
+
+settings set polybar.height.base 30
+settings set polybar.height.extra 2 # voodoo hack in order to have space under underlines in polybar
+settings set polybar.color.background ${TRANSPARENT_COLOR}
+settings set polybar.color.foreground ${FOREGROUND}
+settings set polybar.color.primary ${FOREGROUND}
+settings set polybar.color.secondary ${SECONDARY}
+settings set polybar.color.disabled ${SECONDARY}
+
+settings set bspwm.border.width 0
+settings set bspwm.border.color.normal ${TRANSPARENT_COLOR}
+settings set bspwm.border.color.active ${TRANSPARENT_COLOR}
+settings set bspwm.border.color.focused ${TRANSPARENT_COLOR}
