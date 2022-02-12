@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+set -e
+THEME_DIR="$HOME/.config/theme/${1}"
+deploy-files load "${THEME_DIR}/files.yml" "${THEME_DIR}"
+# reset bspwm if `-r` flag exists
+if [[ "${2}" == "-r" ]]; then
+    bspc wm -r
+fi

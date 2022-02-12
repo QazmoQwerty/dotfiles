@@ -1,0 +1,21 @@
+-
+  file: picom.conf
+  target: ~/.config/picom/picom.conf
+-
+  file: alacritty.yml
+  target: ~/.config/alacritty/alacritty.yml
+-
+  file: wallpaper.png
+  target: ~/.config/feh/wallpaper.png
+-
+  file: rofi.rasi
+  target: ~/.config/rofi/config.rasi
+-
+  file: rofi-nord-theme.rasi
+  target: ~/.config/rofi/nord.rasi
+-
+  file: themerc
+  target: ~/.config/theme/themerc
+# -
+#   file: vscode-settings.json
+#   target: ~/.config/Code/User/settings.json

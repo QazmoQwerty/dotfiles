@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+import os
+import sys
+import subprocess
+import strictyaml
+from strictyaml import Map, Str, Seq, YAML
+
+def parse_yaml(path: str) -> YAML:
+    with open(path) as file:
+        return strictyaml.load(file.read(), schema = Seq(Map({
+            'file': Str(),
+            'target': Str(),
+        })))
+
+def execute(string: str) -> None:
+    print(string)
+    subprocess.run(['sh', '-c', string])
+
+def cp(path: str, target: str) -> None:
+    execute(f'mkdir -p {os.path.dirname(target)} && cp -f {path} {target}')
+
+def main() -> None:
+    if len(sys.argv) != 4 or sys.argv[1] not in ('load', 'save'):
+        print(f'USAGE: {sys.argv[0]} (load|save) YAML_PATH DIR_PATH')
+        return
+    
+    operation = sys.argv[1]
+    yaml_path = sys.argv[2]
+    dir_path = sys.argv[3]
+
+    for i in parse_yaml(yaml_path).data:
+        path = os.path.join(dir_path, i['file'])
+        target = i['target']
+        if operation == 'load':
+            cp(path, target)
+        else: # save
+            cp(target, path)
+
+if __name__ == '__main__':
+    main()
