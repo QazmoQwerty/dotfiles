@@ -8,6 +8,9 @@ commands:
     exec: "~/.config/scripts/toggle-bar-visibility polybar"
     meta: "hide polybar"
   -
+    description: "bspwm: Select theme"
+    exec: "~/.config/scripts/select-theme"
+  -
     description: "launch: Terminal"
     keybinding: "super+t"
     exec: "alacritty"

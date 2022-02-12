@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
-# ~/.config/theme/nord-dark/files/themerc
 
-# "nord-dark" theme
+# "nord-lightish" theme
 
 TRANSPARENT_COLOR='#00000000'
 NORD_0='#2e3440'; NORD_1='#3b4252'; NORD_2='#434c5e'; NORD_3='#4c566a'
@@ -12,12 +11,12 @@ NORD_C='#d08770'; NORD_D='#ebcb8b'; NORD_E='#a3be8c'; NORD_F='#b48ead'
 settings set polybar.height.base 30
 settings set polybar.height.extra 2 # voodoo hack in order to have space under underlines in polybar
 settings set polybar.color.background ${TRANSPARENT_COLOR}
-settings set polybar.color.foreground ${NORD_8}
-settings set polybar.color.primary ${NORD_8}
+settings set polybar.color.foreground ${NORD_0}
+settings set polybar.color.primary ${NORD_0}
 settings set polybar.color.secondary ${NORD_7}
 settings set polybar.color.disabled ${NORD_7}
 
-settings set bspwm.border.width 2
+settings set bspwm.border.width 0
 settings set bspwm.border.color.normal ${NORD_1}
 settings set bspwm.border.color.active ${NORD_8}
 settings set bspwm.border.color.focused ${NORD_8}

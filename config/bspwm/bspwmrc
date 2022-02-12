@@ -13,11 +13,31 @@ function number-of-connected-displays() {
 
 ###################### Global Settings ######################
 
+# Colors (nord theme)
+# TRANSPARENT_COLOR='#00000000'
+# NORD_0='#2e3440'; NORD_1='#3b4252'; NORD_2='#434c5e'; NORD_3='#4c566a'
+# NORD_4='#d8dee9'; NORD_5='#e5e9f0'; NORD_6='#eceff4'; NORD_7='#8fbcbb'
+# NORD_8='#88c0d0'; NORD_9='#81a1c1'; NORD_A='#5e81ac'; NORD_B='#bf616a'
+# NORD_C='#d08770'; NORD_D='#ebcb8b'; NORD_E='#a3be8c'; NORD_F='#b48ead'
+
 settings reset
+
 settings set main_monitor eDP-1
 
-# The themerc sets all of the theme-related settings (colors, borders, etc.)
 ~/.config/theme/themerc
+
+# settings set polybar.height.base 30
+# settings set polybar.height.extra 2 # voodoo hack in order to have space under underlines in polybar
+# settings set polybar.color.background ${TRANSPARENT_COLOR}
+# settings set polybar.color.foreground ${NORD_8}
+# settings set polybar.color.primary ${NORD_8}
+# settings set polybar.color.secondary ${NORD_7}
+# settings set polybar.color.disabled ${NORD_7}
+
+# settings set bspwm.border.width 2
+# settings set bspwm.border.color.normal ${NORD_1}
+# settings set bspwm.border.color.active ${NORD_8}
+# settings set bspwm.border.color.focused ${NORD_8}
 
 ########################## General ##########################
 

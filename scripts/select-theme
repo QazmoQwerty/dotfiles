@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+set -e
+SELECTION=$(ls -d  ~/.config/theme/*/ | xargs -n 1 basename | rofi -dmenu)
+~/.config/theme/set-theme "${SELECTION}" -r
