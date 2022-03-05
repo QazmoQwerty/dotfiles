@@ -1,9 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 MONITOR=$(bspc query --monitors -d --names)
-echo $MONITOR
 NODE=$(bspc query --nodes --node)
-echo $NODE
 DESKTOP=$(dskmgr move $1 -v)
-echo $DESKTOP
 bspc node ${NODE} --to-desktop ${DESKTOP}_${MONITOR}
 bspc node --focus $NODE

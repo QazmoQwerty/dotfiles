@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# "nord-lightish" theme
+# "gruvbox" theme
 
 TRANSPARENT_COLOR='#00000000'
 

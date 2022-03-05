@@ -30,9 +30,11 @@ commands:
     exec: "rofi -show run"
   -
     description: "launch: Visual Studio Code"
+    keybinding: "super+c"
     exec: "code -n"
   -
     description: "Open path in Visual Studio Code"
+    keybinding: "super+shift+c"
     exec: "~/.config/scripts/open-in-vscode"
   -
     description: "Open path in terminal"
@@ -50,12 +52,36 @@ commands:
     exec: "bspc node -t \\~fullscreen"
   -
     description: "Show clipmenu"
-    keybinding: "super+c"
+    keybinding: "super+v"
     exec: "CM_LAUNCHER=rofi clipmenu"
   -
     description: "bspwm: Quit bspwm"
     keybinding: "super+ctrl+shift+q"
     exec: "bspc quit"
+  -
+    description: "bspwm: Cancel preselection"
+    keybinding: "super+Escape"
+    exec: "bspc node -p cancel"
+  -
+    description: "bspwm: Move current window to a pre-selected space"
+    keybinding: "super+shift+m"
+    exec: "bspc node -n last.!automatic"
+  -
+    description: "bspwm: Preselect direction (up)"
+    keybinding: "super+k;super+Up"
+    exec: "bspc node -p north"
+  -
+    description: "bspwm: Preselect direction (down)"
+    keybinding: "super+k;super+Down"
+    exec: "bspc node -p south"
+  -
+    description: "bspwm: Preselect direction (left)"
+    keybinding: "super+k;super+Left"
+    exec: "bspc node -p west"
+  -
+    description: "bspwm: Preselect direction (right)"
+    keybinding: "super+k;super+Right"
+    exec: "bspc node -p east"
   -
     description: "bspwm: Focus window in direction (up)"
     keybinding: "super+Up"
@@ -165,6 +191,7 @@ commands:
   -
     description: "palette: Edit configuration"
     exec: "code ~/.config/palette/palette.yml"
+    meta: 'yaml'
   -
     description: "Edit picom.conf"
     exec: "code ~/.config/picom/picom.conf"

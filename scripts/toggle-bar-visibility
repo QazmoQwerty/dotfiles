@@ -1,14 +1,52 @@
-#!/bin/bash
-WINDOW_ID=$(xdo id -n $1)
-MAIN_MONITOR=$(settings get main_monitor)
-if xwininfo -id ${WINDOW_ID} | grep -q IsViewable
-then
-    xdo hide ${WINDOW_ID}
-    bspc config -m ${MAIN_MONITOR} top_padding 0
-    bspc config -m ${MAIN_MONITOR} top_monocle_padding 0
-else
-    xdo show ${WINDOW_ID}
-    bspc config -m ${MAIN_MONITOR} top_padding 20
-    bspc config -m ${MAIN_MONITOR} top_monocle_padding 5
-fi
+#!/usr/bin/env lua
+require 'sh'
 
+local function get_setting(key)
+    return tostring(ssettings('get', key))
+end
+
+local function config(key, value, monitor)
+    if monitor then
+        bspc('config', key, value)
+    else
+        bspc('config', '-m', monitor, key, value)
+    end
+end
+
+local function is_window_viewable(window_id)
+    local window_info = tostring(xwininfo('-id', window_id))
+    return string.find(window_info, 'IsViewable') and true or false
+end
+
+local function get_window_id(window_name)
+    local result = xdo('id', '-n', window_name)
+    if result.__exitcode ~= 0 then
+        error('No window found with name "' .. window_name .. '"')
+    end
+    return tostring(result)
+end
+
+function ToggleBarVisibility(bar_name)
+    local main_monitor = get_setting('main_monitor')
+    local window_id = get_window_id(bar_name)
+
+    if is_window_viewable(window_id) then
+        xdo('hide', window_id)
+        config('top_padding', '0', main_monitor)
+        config('top_monocle_padding', '0', main_monitor)
+    else
+        local base_height = get_setting('polybar.height.base')
+        local extra_height = get_setting('polybar.height.extra')
+        local window_gap =  tostring(bspc('config', 'window_gap'))
+
+        xdo('show', window_id)
+        config('top_padding', base_height + extra_height * 2 - window_gap, main_monitor)
+        config('top_monocle_padding', extra_height * 2, main_monitor)
+    end
+end
+
+if #arg == 1 then
+    ToggleBarVisibility(arg[1])
+else
+    print('USAGE: ' .. arg[0] .. ' BAR_NAME')
+end

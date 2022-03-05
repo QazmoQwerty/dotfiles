@@ -1,0 +1,14 @@
+{
+    "main_monitor": "eDP-1",
+    "polybar.height.base": "30",
+    "polybar.height.extra": "2",
+    "polybar.color.background": "#00000000",
+    "polybar.color.foreground": "#88c0d0",
+    "polybar.color.primary": "#88c0d0",
+    "polybar.color.secondary": "#8fbcbb",
+    "polybar.color.disabled": "#8fbcbb",
+    "bspwm.border.width": "2",
+    "bspwm.border.color.normal": "#3b4252",
+    "bspwm.border.color.active": "#88c0d0",
+    "bspwm.border.color.focused": "#88c0d0"
+}
