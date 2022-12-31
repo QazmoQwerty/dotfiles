@@ -19,6 +19,9 @@ function number-of-connected-displays() {
 
 ###################### Global Settings ######################
 
+export _JAVA_AWT_WM_NONREPARENTING=1
+wmname "LD3D"
+
 # settings daemon, see https://github.com/QazmoQwerty/simple-settings-daemon
 restart-daemon ssettingsd
 
